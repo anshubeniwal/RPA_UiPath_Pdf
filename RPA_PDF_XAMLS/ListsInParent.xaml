@@ -1,0 +1,219 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="ListsInParent" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sx="clr-namespace:System.Xml;assembly=System.Xml" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="item" Type="InArgument(sx:XmlNode)" />
+    <x:Property Name="xmlDoc" Type="InOutArgument(sx:XmlDocument)" />
+    <x:Property Name="xmlNode" Type="InOutArgument(sx:XmlNode)" />
+    <x:Property Name="errorList" Type="InOutArgument(scg:List(x:Boolean))" />
+    <x:Property Name="errorOrNot" Type="InOutArgument(x:Boolean)" />
+    <x:Property Name="pageNumber" Type="InOutArgument(scg:List(x:String))" />
+    <x:Property Name="page" Type="InOutArgument(x:Int32)" />
+    <x:Property Name="listNo" Type="InOutArgument(x:Int32)" />
+    <x:Property Name="prePage" Type="InOutArgument(x:Int32)" />
+    <x:Property Name="output" Type="InOutArgument(x:String)" />
+    <x:Property Name="listNumbering" Type="InOutArgument(scg:Dictionary(x:String, x:String))" />
+    <x:Property Name="currentListNumbering" Type="InOutArgument(x:String)" />
+    <x:Property Name="listContentIndex" Type="InOutArgument(x:String)" />
+    <x:Property Name="lblOutput" Type="InOutArgument(x:String)" />
+    <x:Property Name="PagesWithListError" Type="InOutArgument(scg:List(x:Int32))" />
+    <x:Property Name="ListCount" Type="InOutArgument(x:Int32)" />
+    <x:Property Name="TestResult" Type="InOutArgument(x:String)" />
+    <x:Property Name="result" Type="InOutArgument(x:String)" />
+    <x:Property Name="AstrikOrHyphenCollection" Type="InOutArgument(scg:List(x:String))" />
+    <x:Property Name="pageWithAstrikORHyphen" Type="InOutArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1238,1342</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>ListsInParent_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml.XPath</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>UiPath.CV</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="ListsInParent" sap:VirtualizedContainerService.HintSize="604,1177" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" DisplayName="Send Hotkey" sap:VirtualizedContainerService.HintSize="562,116" sap2010:WorkflowViewState.IdRef="SendHotkey_1" Key="right" KeyModifiers="None" SpecialKey="True">
+      <ui:SendHotkey.Target>
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}" Id="46226b09-1a1b-4ef3-964c-f860212bbd83">
+          <ui:Target.TimeoutMS>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:Target.TimeoutMS>
+          <ui:Target.WaitForReady>
+            <InArgument x:TypeArguments="ui:WaitForReady" />
+          </ui:Target.WaitForReady>
+        </ui:Target>
+      </ui:SendHotkey.Target>
+    </ui:SendHotkey>
+    <ui:ForEach x:TypeArguments="sx:XmlNode" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="562,617" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[xmlNode.ChildNodes]">
+      <ui:ForEach.Body>
+        <ActivityAction x:TypeArguments="sx:XmlNode">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="sx:XmlNode" Name="ParentItem" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="526,483" sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" DisplayName="Send Hotkey" sap:VirtualizedContainerService.HintSize="484,116" sap2010:WorkflowViewState.IdRef="SendHotkey_2" Key="down" KeyModifiers="None" SpecialKey="True">
+              <ui:SendHotkey.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}" Id="91807fbf-2484-4cbb-baf7-d8a49d2ffdb9">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:SendHotkey.Target>
+            </ui:SendHotkey>
+            <If Condition="[ParentItem.Name.Equals(&quot;L&quot;)]" sap:VirtualizedContainerService.HintSize="484,235" sap2010:WorkflowViewState.IdRef="If_1">
+              <If.Then>
+                <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="ListFix.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InOutArgument x:TypeArguments="scg:List(x:Boolean)" x:Key="errorList">
+                      <mva:VisualBasicReference x:TypeArguments="scg:List(x:Boolean)" ExpressionText="errorList" />
+                    </InOutArgument>
+                    <InOutArgument x:TypeArguments="x:String" x:Key="result">
+                      <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="result" />
+                    </InOutArgument>
+                    <InOutArgument x:TypeArguments="x:Boolean" x:Key="errorOrNot">
+                      <mva:VisualBasicReference x:TypeArguments="x:Boolean" ExpressionText="errorOrNot" />
+                    </InOutArgument>
+                    <InOutArgument x:TypeArguments="scg:List(x:String)" x:Key="pageNumber">
+                      <mva:VisualBasicReference x:TypeArguments="scg:List(x:String)" ExpressionText="pageNumber" />
+                    </InOutArgument>
+                    <InOutArgument x:TypeArguments="x:Int32" x:Key="page">
+                      <mva:VisualBasicReference x:TypeArguments="x:Int32" ExpressionText="page" />
+                    </InOutArgument>
+                    <InOutArgument x:TypeArguments="x:Int32" x:Key="listNo">
+                      <mva:VisualBasicReference x:TypeArguments="x:Int32" ExpressionText="listNo" />
+                    </InOutArgument>
+                    <InOutArgument x:TypeArguments="x:Int32" x:Key="prePage">
+                      <mva:VisualBasicReference x:TypeArguments="x:Int32" ExpressionText="prePage" />
+                    </InOutArgument>
+                    <InOutArgument x:TypeArguments="x:String" x:Key="output">
+                      <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="output" />
+                    </InOutArgument>
+                    <InOutArgument x:TypeArguments="x:Int32" x:Key="i" />
+                    <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="listNumbering">
+                      <mva:VisualBasicReference x:TypeArguments="scg:Dictionary(x:String, x:String)" ExpressionText="listNumbering" />
+                    </InOutArgument>
+                    <InOutArgument x:TypeArguments="x:String" x:Key="currentListNumbering">
+                      <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="currentListNumbering" />
+                    </InOutArgument>
+                    <InOutArgument x:TypeArguments="x:String" x:Key="listContentIndex">
+                      <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="listContentIndex" />
+                    </InOutArgument>
+                    <InOutArgument x:TypeArguments="x:String" x:Key="lblOutput">
+                      <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="lblOutput" />
+                    </InOutArgument>
+                    <InOutArgument x:TypeArguments="x:String" x:Key="title" />
+                    <InArgument x:TypeArguments="sx:XmlNode" x:Key="item">
+                      <mva:VisualBasicValue x:TypeArguments="sx:XmlNode" ExpressionText="ParentItem" />
+                    </InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="TestResult">
+                      <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="TestResult" />
+                    </InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="argument1" />
+                    <InOutArgument x:TypeArguments="scg:List(x:Int32)" x:Key="PagesWithListError">
+                      <mva:VisualBasicReference x:TypeArguments="scg:List(x:Int32)" ExpressionText="PagesWithListError" />
+                    </InOutArgument>
+                    <InOutArgument x:TypeArguments="x:Int32" x:Key="ListCount">
+                      <mva:VisualBasicReference x:TypeArguments="x:Int32" ExpressionText="ListCount" />
+                    </InOutArgument>
+                    <InArgument x:TypeArguments="x:Boolean" x:Key="moveLeft" />
+                    <InOutArgument x:TypeArguments="scg:List(x:String)" x:Key="AstrikOrHyphenCollection">
+                      <mva:VisualBasicReference x:TypeArguments="scg:List(x:String)" ExpressionText="AstrikOrHyphenCollection" />
+                    </InOutArgument>
+                    <InOutArgument x:TypeArguments="x:String" x:Key="pageWithAstrikORHyphen">
+                      <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="pageWithAstrikORHyphen" />
+                    </InOutArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
+              </If.Then>
+            </If>
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEach.Body>
+    </ui:ForEach>
+    <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" DisplayName="Send Hotkey" sap:VirtualizedContainerService.HintSize="562,116" sap2010:WorkflowViewState.IdRef="SendHotkey_3" Key="left" KeyModifiers="None" SpecialKey="True">
+      <ui:SendHotkey.Target>
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}" Id="2109c1b7-023c-44d1-ad8d-af3267f1e0d6">
+          <ui:Target.TimeoutMS>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:Target.TimeoutMS>
+          <ui:Target.WaitForReady>
+            <InArgument x:TypeArguments="ui:WaitForReady" />
+          </ui:Target.WaitForReady>
+        </ui:Target>
+      </ui:SendHotkey.Target>
+    </ui:SendHotkey>
+    <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" DisplayName="Send Hotkey" sap:VirtualizedContainerService.HintSize="562,116" sap2010:WorkflowViewState.IdRef="SendHotkey_4" Key="left" KeyModifiers="None" SpecialKey="True">
+      <ui:SendHotkey.Target>
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}" Id="2109c1b7-023c-44d1-ad8d-af3267f1e0d6">
+          <ui:Target.TimeoutMS>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:Target.TimeoutMS>
+          <ui:Target.WaitForReady>
+            <InArgument x:TypeArguments="ui:WaitForReady" />
+          </ui:Target.WaitForReady>
+        </ui:Target>
+      </ui:SendHotkey.Target>
+    </ui:SendHotkey>
+  </Sequence>
+</Activity>

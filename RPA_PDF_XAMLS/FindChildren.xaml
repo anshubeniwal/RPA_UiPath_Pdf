@@ -1,0 +1,445 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="FindChildren" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sx="clr-namespace:System.Xml;assembly=System.Xml" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="xmlDoc" Type="InOutArgument(sx:XmlDocument)" />
+    <x:Property Name="xmlNode" Type="InOutArgument(sx:XmlNode)" />
+    <x:Property Name="result" Type="InOutArgument(x:String)" />
+    <x:Property Name="errorList" Type="InOutArgument(scg:List(x:Boolean))" />
+    <x:Property Name="errorOrNot" Type="InOutArgument(x:Boolean)" />
+    <x:Property Name="pageNumber" Type="InOutArgument(scg:List(x:String))" />
+    <x:Property Name="page" Type="InOutArgument(x:Int32)" />
+    <x:Property Name="listNo" Type="InOutArgument(x:Int32)" />
+    <x:Property Name="prePage" Type="InOutArgument(x:Int32)" />
+    <x:Property Name="output" Type="InOutArgument(x:String)" />
+    <x:Property Name="i" Type="InOutArgument(x:Int32)" />
+    <x:Property Name="listNumbering" Type="InOutArgument(scg:Dictionary(x:String, x:String))" />
+    <x:Property Name="currentListNumbering" Type="InOutArgument(x:String)" />
+    <x:Property Name="listContentIndex" Type="InOutArgument(x:String)" />
+    <x:Property Name="lblOutput" Type="InOutArgument(x:String)" />
+    <x:Property Name="title" Type="InOutArgument(x:String)" />
+    <x:Property Name="doccount" Type="InOutArgument(x:Int32)" />
+    <x:Property Name="firstH1" Type="InOutArgument(x:String)" />
+    <x:Property Name="h1Error" Type="InOutArgument(x:Boolean)" />
+    <x:Property Name="h1Count" Type="InOutArgument(x:Int32)" />
+    <x:Property Name="h1List" Type="InOutArgument(scg:List(x:String))" />
+    <x:Property Name="TestResult" Type="InOutArgument(x:String)" />
+    <x:Property Name="h1IndexList" Type="InOutArgument(scg:List(x:Int32))" />
+    <x:Property Name="NewTitle" Type="InArgument(x:String)" />
+    <x:Property Name="pageNo" Type="InArgument(x:Int32)" />
+    <x:Property Name="myList" Type="InOutArgument(scg:List(x:Int32))" />
+    <x:Property Name="sectpage" Type="InOutArgument(x:Int32)" />
+    <x:Property Name="secq" Type="InArgument(x:Int32)" />
+    <x:Property Name="sectionNo" Type="InOutArgument(x:Int32)" />
+  </x:Members>
+  <this:FindChildren.secq>
+    <InArgument x:TypeArguments="x:Int32" />
+  </this:FindChildren.secq>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>2518,2561</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>FindChildren_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml.XPath</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>UiPath.CV</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="FindChildren" sap:VirtualizedContainerService.HintSize="2528,2396" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:ForEach x:TypeArguments="sx:XmlNode" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="2486,2304" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[xmlNode.ChildNodes]">
+      <ui:ForEach.Body>
+        <ActivityAction x:TypeArguments="sx:XmlNode">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="sx:XmlNode" Name="itemChild" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="2450,2170" sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" DisplayName="Send Hotkey" sap:VirtualizedContainerService.HintSize="2408,116" sap2010:WorkflowViewState.IdRef="SendHotkey_1" Key="down" KeyModifiers="None" SpecialKey="True">
+              <ui:SendHotkey.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}" Id="91807fbf-2484-4cbb-baf7-d8a49d2ffdb9">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:SendHotkey.Target>
+            </ui:SendHotkey>
+            <Assign sap:VirtualizedContainerService.HintSize="2408,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Int32">[i]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Int32">[i+1]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <If Condition="[itemChild.Name.Equals(&quot;Part&quot;) Or itemChild.Name.Equals(&quot;Sect&quot;)]" sap:VirtualizedContainerService.HintSize="2408,1822" sap2010:WorkflowViewState.IdRef="If_1">
+              <If.Then>
+                <Sequence sap:VirtualizedContainerService.HintSize="1026,1674" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <If Condition="[itemChild.Name.Equals(&quot;Sect&quot;)]" sap:VirtualizedContainerService.HintSize="984,1307" sap2010:WorkflowViewState.IdRef="If_6">
+                    <If.Then>
+                      <Sequence sap:VirtualizedContainerService.HintSize="839,1159" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <Sequence sap:VirtualizedContainerService.HintSize="797,1067" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                          <Sequence.Variables>
+                            <Variable x:TypeArguments="x:String" Default="[title]" Name="newTiTle" />
+                          </Sequence.Variables>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Get Text 'Edit'" sap:VirtualizedContainerService.HintSize="755,106" sap2010:WorkflowViewState.IdRef="GetValue_1">
+                            <ui:GetValue.Target>
+                              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="0de38f6e-b83b-428f-902b-88f92d19bb8f" InformativeScreenshot="a1039f26c61987058811e3fd663b9560" Selector="&lt;wnd app='acrobat.exe' cls='AcrobatSDIWindow' title='*' /&gt;&lt;wnd aaname='Page Number' cls='Edit' /&gt;">
+                                <ui:Target.TimeoutMS>
+                                  <InArgument x:TypeArguments="x:Int32" />
+                                </ui:Target.TimeoutMS>
+                                <ui:Target.WaitForReady>
+                                  <InArgument x:TypeArguments="ui:WaitForReady" />
+                                </ui:Target.WaitForReady>
+                              </ui:Target>
+                            </ui:GetValue.Target>
+                            <ui:GetValue.Value>
+                              <OutArgument x:TypeArguments="x:Int32">[pageNo]</OutArgument>
+                            </ui:GetValue.Value>
+                          </ui:GetValue>
+                          <AddToCollection x:TypeArguments="x:Int32" Collection="[myList]" DisplayName="Add To Collection" sap:VirtualizedContainerService.HintSize="755,22" sap2010:WorkflowViewState.IdRef="AddToCollection`1_1" Item="[pageNo]" />
+                          <If Condition="[sectpage=pageNo]" sap:VirtualizedContainerService.HintSize="755,400" sap2010:WorkflowViewState.IdRef="If_7">
+                            <If.Then>
+                              <Sequence sap:VirtualizedContainerService.HintSize="304,252" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_3">
+                                  <Assign.To>
+                                    <OutArgument x:TypeArguments="x:Int32">[sectionNo]</OutArgument>
+                                  </Assign.To>
+                                  <Assign.Value>
+                                    <InArgument x:TypeArguments="x:Int32">[sectionNo+1]</InArgument>
+                                  </Assign.Value>
+                                </Assign>
+                                <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_4">
+                                  <Assign.To>
+                                    <OutArgument x:TypeArguments="x:Int32">[sectpage]</OutArgument>
+                                  </Assign.To>
+                                  <Assign.Value>
+                                    <InArgument x:TypeArguments="x:Int32">[pageNo]</InArgument>
+                                  </Assign.Value>
+                                </Assign>
+                              </Sequence>
+                            </If.Then>
+                            <If.Else>
+                              <Sequence sap:VirtualizedContainerService.HintSize="304,252" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_5">
+                                  <Assign.To>
+                                    <OutArgument x:TypeArguments="x:Int32">[sectionNo]</OutArgument>
+                                  </Assign.To>
+                                  <Assign.Value>
+                                    <InArgument x:TypeArguments="x:Int32">1</InArgument>
+                                  </Assign.Value>
+                                </Assign>
+                                <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_6">
+                                  <Assign.To>
+                                    <OutArgument x:TypeArguments="x:Int32">[sectpage]</OutArgument>
+                                  </Assign.To>
+                                  <Assign.Value>
+                                    <InArgument x:TypeArguments="x:Int32">[pageNo]</InArgument>
+                                  </Assign.Value>
+                                </Assign>
+                              </Sequence>
+                            </If.Else>
+                          </If>
+                          <If Condition="[sectionNo&gt;1]" sap:VirtualizedContainerService.HintSize="755,327" sap2010:WorkflowViewState.IdRef="If_8">
+                            <If.Then>
+                              <Sequence sap:VirtualizedContainerService.HintSize="376,179" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="SectionFix.xaml">
+                                  <ui:InvokeWorkflowFile.Arguments>
+                                    <InArgument x:TypeArguments="x:Int32" x:Key="pageNo">[pageNo]</InArgument>
+                                    <InOutArgument x:TypeArguments="scg:List(x:Int32)" x:Key="myList">[myList]</InOutArgument>
+                                    <InOutArgument x:TypeArguments="x:Int32" x:Key="sectpage">[sectpage]</InOutArgument>
+                                    <InArgument x:TypeArguments="x:Int32" x:Key="secq">[secq]</InArgument>
+                                    <InOutArgument x:TypeArguments="x:Int32" x:Key="sectionNo">[sectionNo]</InOutArgument>
+                                    <InOutArgument x:TypeArguments="sx:XmlNode" x:Key="xmlNode">[itemChild]</InOutArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="NewTitle">[title]</InArgument>
+                                  </ui:InvokeWorkflowFile.Arguments>
+                                </ui:InvokeWorkflowFile>
+                              </Sequence>
+                            </If.Then>
+                            <If.Else>
+                              <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_8" UnSafe="False" WorkflowFileName="FindChildren.xaml">
+                                <ui:InvokeWorkflowFile.Arguments>
+                                  <InOutArgument x:TypeArguments="sx:XmlDocument" x:Key="xmlDoc">[xmlDoc]</InOutArgument>
+                                  <InOutArgument x:TypeArguments="sx:XmlNode" x:Key="xmlNode">[itemChild]</InOutArgument>
+                                  <InOutArgument x:TypeArguments="x:String" x:Key="result">[result]</InOutArgument>
+                                  <InOutArgument x:TypeArguments="scg:List(x:Boolean)" x:Key="errorList">[errorList]</InOutArgument>
+                                  <InOutArgument x:TypeArguments="x:Boolean" x:Key="errorOrNot">[errorOrNot]</InOutArgument>
+                                  <InOutArgument x:TypeArguments="scg:List(x:String)" x:Key="pageNumber">[pageNumber]</InOutArgument>
+                                  <InOutArgument x:TypeArguments="x:Int32" x:Key="page">[page]</InOutArgument>
+                                  <InOutArgument x:TypeArguments="x:Int32" x:Key="listNo">[listNo]</InOutArgument>
+                                  <InOutArgument x:TypeArguments="x:Int32" x:Key="prePage">[prePage]</InOutArgument>
+                                  <InOutArgument x:TypeArguments="x:String" x:Key="output">[output]</InOutArgument>
+                                  <InOutArgument x:TypeArguments="x:Int32" x:Key="i">[i]</InOutArgument>
+                                  <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="listNumbering">[listNumbering]</InOutArgument>
+                                  <InOutArgument x:TypeArguments="x:String" x:Key="currentListNumbering" />
+                                  <InOutArgument x:TypeArguments="x:String" x:Key="listContentIndex">[listContentIndex]</InOutArgument>
+                                  <InOutArgument x:TypeArguments="x:String" x:Key="lblOutput">[lblOutput]</InOutArgument>
+                                  <InOutArgument x:TypeArguments="x:String" x:Key="title">[title]</InOutArgument>
+                                  <InOutArgument x:TypeArguments="x:Int32" x:Key="doccount">[doccount]</InOutArgument>
+                                  <InOutArgument x:TypeArguments="x:String" x:Key="firstH1">[firstH1]</InOutArgument>
+                                  <InOutArgument x:TypeArguments="x:Boolean" x:Key="h1Error">[h1Error]</InOutArgument>
+                                  <InOutArgument x:TypeArguments="x:Int32" x:Key="h1Count">[h1Count]</InOutArgument>
+                                  <InOutArgument x:TypeArguments="scg:List(x:String)" x:Key="h1List">[h1List]</InOutArgument>
+                                  <InOutArgument x:TypeArguments="x:String" x:Key="TestResult">[TestResult]</InOutArgument>
+                                  <InOutArgument x:TypeArguments="scg:List(x:Int32)" x:Key="h1IndexList">[h1IndexList]</InOutArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="NewTitle">[title]</InArgument>
+                                  <InArgument x:TypeArguments="x:Int32" x:Key="pageNo">[pageNo]</InArgument>
+                                  <InOutArgument x:TypeArguments="scg:List(x:Int32)" x:Key="myList">[myList]</InOutArgument>
+                                  <InOutArgument x:TypeArguments="x:Int32" x:Key="sectpage">[sectpage]</InOutArgument>
+                                  <InArgument x:TypeArguments="x:Int32" x:Key="secq">[secq]</InArgument>
+                                  <InOutArgument x:TypeArguments="x:Int32" x:Key="sectionNo">[sectionNo]</InOutArgument>
+                                </ui:InvokeWorkflowFile.Arguments>
+                              </ui:InvokeWorkflowFile>
+                            </If.Else>
+                          </If>
+                        </Sequence>
+                      </Sequence>
+                    </If.Then>
+                  </If>
+                  <If Condition="[itemChild.Name.Equals(&quot;Part&quot;)]" sap:VirtualizedContainerService.HintSize="984,235" sap2010:WorkflowViewState.IdRef="If_9">
+                    <If.Then>
+                      <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="FindChildren.xaml">
+                        <ui:InvokeWorkflowFile.Arguments>
+                          <InOutArgument x:TypeArguments="sx:XmlDocument" x:Key="xmlDoc">[xmlDoc]</InOutArgument>
+                          <InOutArgument x:TypeArguments="sx:XmlNode" x:Key="xmlNode">[itemChild]</InOutArgument>
+                          <InOutArgument x:TypeArguments="x:String" x:Key="result">[result]</InOutArgument>
+                          <InOutArgument x:TypeArguments="scg:List(x:Boolean)" x:Key="errorList">[errorList]</InOutArgument>
+                          <InOutArgument x:TypeArguments="x:Boolean" x:Key="errorOrNot">[errorOrNot]</InOutArgument>
+                          <InOutArgument x:TypeArguments="scg:List(x:String)" x:Key="pageNumber">[pageNumber]</InOutArgument>
+                          <InOutArgument x:TypeArguments="x:Int32" x:Key="page">[page]</InOutArgument>
+                          <InOutArgument x:TypeArguments="x:Int32" x:Key="listNo">[listNo]</InOutArgument>
+                          <InOutArgument x:TypeArguments="x:Int32" x:Key="prePage">[prePage]</InOutArgument>
+                          <InOutArgument x:TypeArguments="x:String" x:Key="output">[output]</InOutArgument>
+                          <InOutArgument x:TypeArguments="x:Int32" x:Key="i">[i]</InOutArgument>
+                          <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="listNumbering">[listNumbering]</InOutArgument>
+                          <InOutArgument x:TypeArguments="x:String" x:Key="currentListNumbering" />
+                          <InOutArgument x:TypeArguments="x:String" x:Key="listContentIndex">[listContentIndex]</InOutArgument>
+                          <InOutArgument x:TypeArguments="x:String" x:Key="lblOutput">[lblOutput]</InOutArgument>
+                          <InOutArgument x:TypeArguments="x:String" x:Key="title">[title]</InOutArgument>
+                          <InOutArgument x:TypeArguments="x:Int32" x:Key="doccount">[doccount]</InOutArgument>
+                          <InOutArgument x:TypeArguments="x:String" x:Key="firstH1">[firstH1]</InOutArgument>
+                          <InOutArgument x:TypeArguments="x:Boolean" x:Key="h1Error">[h1Error]</InOutArgument>
+                          <InOutArgument x:TypeArguments="x:Int32" x:Key="h1Count">[h1Count]</InOutArgument>
+                          <InOutArgument x:TypeArguments="scg:List(x:String)" x:Key="h1List">[h1List]</InOutArgument>
+                          <InOutArgument x:TypeArguments="x:String" x:Key="TestResult">[TestResult]</InOutArgument>
+                          <InOutArgument x:TypeArguments="scg:List(x:Int32)" x:Key="h1IndexList">[h1IndexList]</InOutArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="NewTitle">[title]</InArgument>
+                          <InArgument x:TypeArguments="x:Int32" x:Key="pageNo">[pageNo]</InArgument>
+                          <InOutArgument x:TypeArguments="scg:List(x:Int32)" x:Key="myList">[myList]</InOutArgument>
+                          <InOutArgument x:TypeArguments="x:Int32" x:Key="sectpage">[sectpage]</InOutArgument>
+                          <InArgument x:TypeArguments="x:Int32" x:Key="secq">[secq]</InArgument>
+                          <InOutArgument x:TypeArguments="x:Int32" x:Key="sectionNo">[sectionNo]</InOutArgument>
+                        </ui:InvokeWorkflowFile.Arguments>
+                      </ui:InvokeWorkflowFile>
+                    </If.Then>
+                  </If>
+                </Sequence>
+              </If.Then>
+              <If.Else>
+                <If Condition="[itemChild.Name.Equals(&quot;L&quot;)]" sap:VirtualizedContainerService.HintSize="1337,679" sap2010:WorkflowViewState.IdRef="If_2">
+                  <If.Then>
+                    <Sequence sap:VirtualizedContainerService.HintSize="200,83" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </Sequence>
+                  </If.Then>
+                  <If.Else>
+                    <If Condition="[itemChild.Name.Equals(&quot;Document&quot;)]" sap:VirtualizedContainerService.HintSize="1092,531" sap2010:WorkflowViewState.IdRef="If_4">
+                      <If.Then>
+                        <Sequence sap:VirtualizedContainerService.HintSize="418,371" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <Assign sap:VirtualizedContainerService.HintSize="376,60" sap2010:WorkflowViewState.IdRef="Assign_2">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:Int32">[doccount]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:Int32">[doccount+1]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                          <Sequence sap:VirtualizedContainerService.HintSize="376,179" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="FindChildren.xaml">
+                              <ui:InvokeWorkflowFile.Arguments>
+                                <InOutArgument x:TypeArguments="sx:XmlDocument" x:Key="xmlDoc">[xmlDoc]</InOutArgument>
+                                <InOutArgument x:TypeArguments="sx:XmlNode" x:Key="xmlNode">[itemChild]</InOutArgument>
+                                <InOutArgument x:TypeArguments="x:String" x:Key="result">[result]</InOutArgument>
+                                <InOutArgument x:TypeArguments="scg:List(x:Boolean)" x:Key="errorList">[errorList]</InOutArgument>
+                                <InOutArgument x:TypeArguments="x:Boolean" x:Key="errorOrNot">[errorOrNot]</InOutArgument>
+                                <InOutArgument x:TypeArguments="scg:List(x:String)" x:Key="pageNumber">[pageNumber]</InOutArgument>
+                                <InOutArgument x:TypeArguments="x:Int32" x:Key="page">[page]</InOutArgument>
+                                <InOutArgument x:TypeArguments="x:Int32" x:Key="listNo">[listNo]</InOutArgument>
+                                <InOutArgument x:TypeArguments="x:Int32" x:Key="prePage">[prePage]</InOutArgument>
+                                <InOutArgument x:TypeArguments="x:String" x:Key="output">[output]</InOutArgument>
+                                <InOutArgument x:TypeArguments="x:Int32" x:Key="i">[i]</InOutArgument>
+                                <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="listNumbering">[listNumbering]</InOutArgument>
+                                <InOutArgument x:TypeArguments="x:String" x:Key="currentListNumbering" />
+                                <InOutArgument x:TypeArguments="x:String" x:Key="listContentIndex">[listContentIndex]</InOutArgument>
+                                <InOutArgument x:TypeArguments="x:String" x:Key="lblOutput">[lblOutput]</InOutArgument>
+                                <InOutArgument x:TypeArguments="x:String" x:Key="title">[title]</InOutArgument>
+                                <InOutArgument x:TypeArguments="x:Int32" x:Key="doccount">[doccount]</InOutArgument>
+                                <InOutArgument x:TypeArguments="x:String" x:Key="firstH1">[firstH1]</InOutArgument>
+                                <InOutArgument x:TypeArguments="x:Boolean" x:Key="h1Error">[h1Error]</InOutArgument>
+                                <InOutArgument x:TypeArguments="x:Int32" x:Key="h1Count">[h1Count]</InOutArgument>
+                                <InOutArgument x:TypeArguments="scg:List(x:String)" x:Key="h1List">[h1List]</InOutArgument>
+                                <InOutArgument x:TypeArguments="x:String" x:Key="TestResult">[TestResult]</InOutArgument>
+                                <InOutArgument x:TypeArguments="scg:List(x:Int32)" x:Key="h1IndexList">[h1IndexList]</InOutArgument>
+                                <InArgument x:TypeArguments="x:String" x:Key="NewTitle">[title]</InArgument>
+                                <InArgument x:TypeArguments="x:Int32" x:Key="pageNo">[pageNo]</InArgument>
+                                <InOutArgument x:TypeArguments="scg:List(x:Int32)" x:Key="myList">[myList]</InOutArgument>
+                                <InOutArgument x:TypeArguments="x:Int32" x:Key="sectpage">[sectpage]</InOutArgument>
+                                <InArgument x:TypeArguments="x:Int32" x:Key="secq">[secq]</InArgument>
+                                <InOutArgument x:TypeArguments="x:Int32" x:Key="sectionNo">[sectionNo]</InOutArgument>
+                              </ui:InvokeWorkflowFile.Arguments>
+                            </ui:InvokeWorkflowFile>
+                          </Sequence>
+                        </Sequence>
+                      </If.Then>
+                      <If.Else>
+                        <If Condition="[itemChild.Name.Equals(&quot;H1&quot;)]" sap:VirtualizedContainerService.HintSize="629,383" sap2010:WorkflowViewState.IdRef="If_3">
+                          <If.Else>
+                            <If Condition="[itemChild.Name.Equals(&quot;Div&quot;)]" sap:VirtualizedContainerService.HintSize="484,235" sap2010:WorkflowViewState.IdRef="If_10">
+                              <If.Then>
+                                <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_9" UnSafe="False" WorkflowFileName="FindChildren.xaml">
+                                  <ui:InvokeWorkflowFile.Arguments>
+                                    <InOutArgument x:TypeArguments="sx:XmlDocument" x:Key="xmlDoc">[xmlDoc]</InOutArgument>
+                                    <InOutArgument x:TypeArguments="sx:XmlNode" x:Key="xmlNode">[itemChild]</InOutArgument>
+                                    <InOutArgument x:TypeArguments="x:String" x:Key="result">[result]</InOutArgument>
+                                    <InOutArgument x:TypeArguments="scg:List(x:Boolean)" x:Key="errorList">[errorList]</InOutArgument>
+                                    <InOutArgument x:TypeArguments="x:Boolean" x:Key="errorOrNot">[errorOrNot]</InOutArgument>
+                                    <InOutArgument x:TypeArguments="scg:List(x:String)" x:Key="pageNumber">[pageNumber]</InOutArgument>
+                                    <InOutArgument x:TypeArguments="x:Int32" x:Key="page">[page]</InOutArgument>
+                                    <InOutArgument x:TypeArguments="x:Int32" x:Key="listNo">[listNo]</InOutArgument>
+                                    <InOutArgument x:TypeArguments="x:Int32" x:Key="prePage">[prePage]</InOutArgument>
+                                    <InOutArgument x:TypeArguments="x:String" x:Key="output">[output]</InOutArgument>
+                                    <InOutArgument x:TypeArguments="x:Int32" x:Key="i">[i]</InOutArgument>
+                                    <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="listNumbering">[listNumbering]</InOutArgument>
+                                    <InOutArgument x:TypeArguments="x:String" x:Key="currentListNumbering" />
+                                    <InOutArgument x:TypeArguments="x:String" x:Key="listContentIndex">[listContentIndex]</InOutArgument>
+                                    <InOutArgument x:TypeArguments="x:String" x:Key="lblOutput">[lblOutput]</InOutArgument>
+                                    <InOutArgument x:TypeArguments="x:String" x:Key="title">[title]</InOutArgument>
+                                    <InOutArgument x:TypeArguments="x:Int32" x:Key="doccount">[doccount]</InOutArgument>
+                                    <InOutArgument x:TypeArguments="x:String" x:Key="firstH1">[firstH1]</InOutArgument>
+                                    <InOutArgument x:TypeArguments="x:Boolean" x:Key="h1Error">[h1Error]</InOutArgument>
+                                    <InOutArgument x:TypeArguments="x:Int32" x:Key="h1Count">[h1Count]</InOutArgument>
+                                    <InOutArgument x:TypeArguments="scg:List(x:String)" x:Key="h1List">[h1List]</InOutArgument>
+                                    <InOutArgument x:TypeArguments="x:String" x:Key="TestResult">[TestResult]</InOutArgument>
+                                    <InOutArgument x:TypeArguments="scg:List(x:Int32)" x:Key="h1IndexList">[h1IndexList]</InOutArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="NewTitle">[title]</InArgument>
+                                    <InArgument x:TypeArguments="x:Int32" x:Key="pageNo">[pageNo]</InArgument>
+                                    <InOutArgument x:TypeArguments="scg:List(x:Int32)" x:Key="myList">[myList]</InOutArgument>
+                                    <InOutArgument x:TypeArguments="x:Int32" x:Key="sectpage">[sectpage]</InOutArgument>
+                                    <InArgument x:TypeArguments="x:Int32" x:Key="secq">[secq]</InArgument>
+                                    <InOutArgument x:TypeArguments="x:Int32" x:Key="sectionNo">[sectionNo]</InOutArgument>
+                                  </ui:InvokeWorkflowFile.Arguments>
+                                </ui:InvokeWorkflowFile>
+                              </If.Then>
+                            </If>
+                          </If.Else>
+                        </If>
+                      </If.Else>
+                    </If>
+                  </If.Else>
+                </If>
+              </If.Else>
+            </If>
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEach.Body>
+    </ui:ForEach>
+  </Sequence>
+</Activity>
